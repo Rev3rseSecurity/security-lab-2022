@@ -1,0 +1,27 @@
+
+local data, eof = ngx.arg[1], ngx.arg[2]
+
+--[[
+    -- cerca stringa in response body:
+    if string.find(data, "foo") then ...
+
+    -- regex group su response body:
+    local m, err = ngx.re.match(data, '.*(foo).*') -- m[1] = "foo"
+
+    -- string substitution in lua
+    local bar = string.gsub("foo","o","a") -- faa
+
+]]--
+
+if string.find(data, "var wc_cart_params") then
+    local m, err = ngx.re.match(data, '.*"apply_coupon_nonce":"([^"]+)".*')
+    if m then
+        ngx.log(ngx.WARN, "found nonce: " .. m[1])
+    
+        newnonce = string.gsub(m[1],"4",'"+[!+[]+!+[]+!+[]+!+[]]+[]+"')
+        newnonce = string.gsub(newnonce,"f",'"+(![]+[])[+[]]+"')
+        newnonce = string.gsub(newnonce,"a",'"+(![]+[])[+!+[]]+"')
+                  
+        ngx.arg[1] = string.gsub(data, m[1], newnonce)
+    end
+end

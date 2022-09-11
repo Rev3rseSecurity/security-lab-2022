@@ -1,0 +1,34 @@
+ngx.req.read_body()
+
+local log = function(msg)
+    ngx.log(ngx.WARN, msg)
+end
+
+local cart_session      = ngx.var.cookie_woocommerce_cart_hash
+local request_uri       = ngx.var.request_uri
+local request_method    = ngx.var.request_method
+local args              = ngx.req.get_post_args()
+
+ngx.req.clear_header("Accept-Encoding")
+
+if not cart_session then
+    if string.find(request_uri, 'apply_coupon') then
+        if request_method == "POST" then
+            if args["coupon_code"] and args["security"] then
+                return ngx.exit(ngx.HTTP_FORBIDDEN)
+            end
+        end
+    end
+else
+    if string.find(request_uri, 'apply_coupon') then
+        if request_method == "POST" then
+            if args["coupon_code"] and args["security"] then
+                if args["coupon_token"] then
+                    if args["coupon_token"] ~= "asdasd" then
+                        return ngx.exit(ngx.HTTP_FORBIDDEN)
+                    end
+                end
+            end
+        end
+    end
+end
