@@ -9,6 +9,15 @@ Ogni partecipante avrà a disposizione:
 - Un target-group che mette in comunicazione il bilanciatore e l'istanza ec2
 - Un editor VSCode online utilizzabile tramite browser
 
+Ogni partecipante sarà identificato con un numero da 00 a 30. Questo significa che ogni risorsa su AWS avrà il numero del partecipante a cui appartiene. Ad esempio, se sono il partecipante numero **12**:
+
+- Il mio e-commerce sarà `http://12.lab.be3rse.com`
+- Il mio bilanciatore su AWS si chiama `bilanciatore-12`
+- Il mio target-group su AWS sarà `tg-12`
+- Chiamerò la mia Lambda function `lambda-12`
+- Chiamerò il mio CloudWatch Alarm `alarm-dos-12`
+- ecc...
+
 ## Bilanciatore AWS
 
 Il bilanciatore di AWS che useremo si chiama "**E**lastic **L**oad **B**alancer" e ci si riferisce a questa tipologia di bilanciatore con `elbv2`. Ogni partecipante al lab avrà il suo bilanciatore dedicato.
