@@ -109,3 +109,48 @@ Un esempio di ARN di un target-group è:
 ```
 arn:aws:elasticloadbalancing:eu-central-1:242136087624:targetgroup/tg-01/2d831d687e44e373
 ```
+
+## Exploit
+
+nella cartella `exploits/` troverete due script python per sfruttare/simulare le vulnerabiltà con cui avremo a che fare durante il lab.
+
+Il primo è `exploits/dos.py` che come si può dedurre dal nome genera un Denial Of Service sul e-commerce. Per praticità ho simulato un attacco volumetrico inserendo una vulnerabilità ReDoS che ha come effetto quello di far occupare molta CPU ai worker del webserver (come avviene durante un attacco volumetrico ma per saturazione delle risorse).
+
+Come usare l'exploit:
+```bash
+$ python3 dos.py --help
+usage: dos.py [-h] -n NODE [-w WORKERS] [-l PAYLOADLEN] [-r NREQ]
+
+options:
+  -h, --help            show this help message and exit
+  -n NODE, --node NODE  Target Node number
+  -w WORKERS, --workers WORKERS
+                        Number of workers
+  -l PAYLOADLEN, --payloadlen PAYLOADLEN
+                        Length of the payload
+  -r NREQ, --nreq NREQ  Number of HTTP requests per worker
+```
+
+Lanciare l'attacco al proprio e-commerce (assumendo che il vostro numero sia 00):
+```bash
+python3 dos.py -n 00 -w 2 -l 5000 -r 1000
+```
+
+Il comando sopra invia 1000 request http verso 00.lab.be3rse.com con un payload di circa 5KB.
+
+Il secondo exploit è `exploits/coupon_brute_force.py` ed è un semplice brute-force di codici di sconto per il nostro e-commerce.
+
+Come usare l'exploit:
+```bash
+$ python3 coupon_brute_force.py --help
+usage: coupon_brute_force.py [-h] -n NODE
+
+options:
+  -h, --help            show this help message and exit
+  -n NODE, --node NODE  Target Node number
+```
+
+Lanciare l'attacco al proprio e-commerce (assumendo che il vostro numero sia 00):
+```bash
+$ python3 coupon_brute_force.py -n 00
+```
