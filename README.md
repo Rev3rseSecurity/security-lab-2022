@@ -1,6 +1,8 @@
 # Rev3rse Security Lab 2022
 
-in questo repository troverai informazioni utili, script e soluzioni utili durante il laboratorio.
+In questo repository troverai informazioni utili, script e soluzioni utili durante il laboratorio.
+
+Siamo il gruppo di sicurezza che ha in carico la protezione dell'e-commerce di **Be3rse** l'azienda numero uno al mondo di vendita on-line di birra! Il sito sta subendo attacchi e possiamo contare solo sulle nostre forze (e su ciò che ci offre il cloud provider di Be3rse) per mitigarli. Il famigerato gruppo di Hacktivisti "**Alcolisti Anonymous**" minaccia il business dell'azienda Be3rse, ritenendola complice della diffusione di sostanze alcoliche per cui il gruppo è fortemente contraria.
 
 Ogni partecipante avrà a disposizione:
 - Accesso alla console web di AWS con username e password
